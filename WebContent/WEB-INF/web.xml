@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>DashBoard</display-name>
+	
+<!-- 	<servlet> -->
+<!-- 		<description></description> -->
+<!-- 		<display-name>ConfigServlet</display-name> -->
+<!-- 		<servlet-name>ConfigServlet</servlet-name> -->
+<!-- 		<servlet-class>comapp.ConfigServlet</servlet-class> -->
+<!-- 		<init-param> -->
+<!-- 			<description></description> -->
+<!-- 			<param-name>config-properties-location</param-name> -->
+<!-- 			<param-value>C:/Comapp/Config</param-value> -->
+<!-- 		</init-param> -->
+<!-- 		<load-on-startup>100</load-on-startup> -->
+<!-- 		<enabled>true</enabled> -->
+<!-- 		<async-supported>false</async-supported> -->
+<!-- 	</servlet> -->
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>ConfigServlet</servlet-name> -->
+<!-- 		<url-pattern>/ConfigServlet</url-pattern> -->
+<!-- 	</servlet-mapping> -->
+	
+<!-- 	============================	-->
+<!--	Da Attivare per					-->
+<!--		CCC							-->
+<!--		CCT-F						-->
+<!-- 	============================	-->
+<!-- 	<servlet> -->
+<!-- 		<description></description> -->
+<!-- 		<display-name>SystemStartServlet</display-name> -->
+<!-- 		<servlet-name>SystemStartServlet</servlet-name> -->
+<!-- 		<servlet-class>comapp.SystemStartServlet</servlet-class> -->
+<!-- 		<load-on-startup>100</load-on-startup> -->
+<!-- 		<enabled>true</enabled> -->
+<!-- 		<async-supported>false</async-supported> -->
+<!-- 	</servlet> -->
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>SystemStartServlet</servlet-name> -->
+<!-- 		<url-pattern>/SystemStartServlet</url-pattern> -->
+<!-- 	</servlet-mapping> -->
+<!-- 	============================	-->
+<!--	Da Attivare per					-->
+<!--		CCT-F						-->
+<!-- 	============================	-->
+<!-- 	<servlet> -->
+<!-- 		<description></description> -->
+<!-- 		<display-name>RealTimeMySQLServlet</display-name> -->
+<!-- 		<servlet-name>RealTimeMySQLServlet</servlet-name> -->
+<!-- 		<servlet-class>comapp.RealTimeMySQLServlet</servlet-class> -->
+<!-- 		<init-param> -->
+<!-- 			<param-name>config-properties-location</param-name> -->
+<!-- 			<param-value>C:/Comapp/Config</param-value> -->
+<!-- 		</init-param> -->
+<!-- 		<load-on-startup>500</load-on-startup> -->
+<!-- 		<enabled>true</enabled> -->
+<!-- 		<async-supported>false</async-supported> -->
+<!-- 	</servlet> -->
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>RealTimeMySQLServlet</servlet-name> -->
+<!-- 		<url-pattern>/RealTimeMySQLServlet</url-pattern> -->
+<!-- 	</servlet-mapping> -->
+<!-- 	============================	 -->
+
+<!-- 	<filter> -->
+<!-- 		<filter-name>SecurityFilter</filter-name> -->
+<!-- 		<filter-class>comapp.SecurityFilter</filter-class> -->
+<!-- 	</filter> -->
+<!-- 	<filter-mapping> -->
+<!-- 		<filter-name>SecurityFilter</filter-name> -->
+<!-- 		<url-pattern>/*</url-pattern> -->
+<!-- 	</filter-mapping> -->
+	
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>
