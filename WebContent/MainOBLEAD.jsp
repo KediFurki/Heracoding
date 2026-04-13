@@ -24,6 +24,11 @@
 	log.info(session.getId() + " - ******* new request ***** ");
 	//==	REQUEST PARAMETERS	====
 	//==============================
+	boolean oblead_bck = false;
+	try {
+		oblead_bck = (boolean) session.getAttribute("OBLEAD-BCK");
+	} catch (Exception ex) {
+	}
 %>
 <body>
 	<table style="width: 100%; top: -3px">
@@ -35,6 +40,9 @@
 							<table class="left">
 								<tr>
 									<td><a class="green" id="OutboundListLeadGlobal" href="OutboundListLeadGlobal.jsp" target="_MainIframe">Lista Lead OutBound</a></td>
+<% if (oblead_bck) { %>
+									<td><a class="green" id="OutboundListBckGlobal" href="OutboundListBckGlobal.jsp" target="_MainIframe">Lista Lead OutBound Backend</a></td>
+<% } %>
 								</tr>
 							</table>
 						</td>
@@ -91,6 +99,7 @@
 
 		ChangeActiveMenu = function(menu) {
 			$("#OutboundListLeadGlobal").removeClass("active");
+			$("#OutboundListBckGlobal").removeClass("active");
 			$(menu).addClass("active");
 			$("#Footer").css('display', 'none');
 		}

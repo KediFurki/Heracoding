@@ -1,5 +1,3 @@
-<%@page import="org.apache.catalina.Session"%>
-<%@page import="javax.security.auth.message.callback.PrivateKeyCallback.Request"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@page import="javax.naming.Context"%>
 <%@page import="javax.sql.DataSource"%>

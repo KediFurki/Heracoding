@@ -21,6 +21,7 @@
 
 	log.info(session.getId() + " - **** Login Info ****");
 	log.info(session.getId() + " - **** User: " + user);
+
 	String SystemEnvironment = ConfigServlet.getProperties().getProperty("SystemEnvironment","CCC");
 	Properties cs = Utility.getSystemProperties(SystemEnvironment);
 	IConfService conf = null;
@@ -100,6 +101,12 @@
 		case "OUTBOUNDLEAD":
 			session.setAttribute("DBSystemProperties", "CCC");
 			session.setAttribute("Environment", "CCC");
+			response.sendRedirect("MainOBLEAD.jsp");
+			break;
+		case "OUTBOUNDLEAD-BCK":
+			session.setAttribute("DBSystemProperties", "CCC");
+			session.setAttribute("Environment", "CCC");
+			session.setAttribute("OBLEAD-BCK", true);
 			response.sendRedirect("MainOBLEAD.jsp");
 			break;
 
