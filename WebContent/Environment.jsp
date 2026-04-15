@@ -70,6 +70,7 @@
 			session.setAttribute("CCC-MAIL", false);
 			session.setAttribute("CCC-MAIL-RT", false);
 			session.setAttribute("CCC-INFOMART", false);
+			session.setAttribute("OBLEAD-BCK", true);
 			response.sendRedirect("MainCCC.jsp");
 			break;
 		case "CCC-MAIL":
@@ -78,6 +79,7 @@
 			session.setAttribute("CCC-MAIL", true);
 			session.setAttribute("CCC-MAIL-RT", false);
 			session.setAttribute("CCC-INFOMART", false);
+			session.setAttribute("OBLEAD-BCK", true);
 			response.sendRedirect("MainCCC.jsp");
 			break;
 		case "CCC-MAIL-RT":
@@ -86,6 +88,7 @@
 			session.setAttribute("CCC-MAIL", true);
 			session.setAttribute("CCC-MAIL-RT", true);
 			session.setAttribute("CCC-INFOMART", true);
+			session.setAttribute("OBLEAD-BCK", true);
 			response.sendRedirect("MainCCC.jsp");
 			break;
 		case "WEB-MAIL-CCC":

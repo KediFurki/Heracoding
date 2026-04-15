@@ -73,7 +73,12 @@
 	try {
 		ccc_infomart = (boolean) session.getAttribute("CCC-INFOMART");
 	} catch (Exception ex) {
-	}	
+	}
+	boolean oblead_bck = false;
+	try {
+		oblead_bck = (boolean) session.getAttribute("OBLEAD-BCK");
+	} catch (Exception ex) {
+	}
 %>
 <body>
 	<table style="width: 100%; top: -3px">
@@ -106,8 +111,11 @@
 									<td><a class="green" id="TopGlobal" href="TopGlobal.jsp" target="_MainIframe">Clienti TOP</a></td>
 									<td><a class="green" id="OperatorAvailableGlobal" href="OperatorAvailableGlobal.jsp" target="_MainIframe">Flag Operatore Disponibile</a></td>
 									<td><a class="green" id="OutboundListLeadGlobal" href="OutboundListLeadGlobal.jsp" target="_MainIframe">Lista Lead OutBound</a></td>
-									<td><a class="green" id="TcpGlobal" href="TcpGlobal.jsp" target="_MainIframe">Clienti Tariffa TCP</a></td>
-								</tr>
+								<td><a class="green" id="TcpGlobal" href="TcpGlobal.jsp" target="_MainIframe">Clienti Tariffa TCP</a></td>
+<% if (oblead_bck) { %>
+									<td><a class="green" id="OutboundListBckGlobal" href="OutboundListBckGlobal.jsp" target="_MainIframe">Lista Lead OutBound Backend</a></td>
+<% } %>
+							</tr>
 							</table>
 						</td>
 						<td style="width: 4%">
@@ -206,6 +214,7 @@
 			$("#OperatorAvailableGlobal").removeClass("active");
 			$("#OutboundListLeadGlobal").removeClass("active");
 			$("#TcpGlobal").removeClass("active");
+			$("#OutboundListBckGlobal").removeClass("active");
 			//	$("#SurveyWeb").removeClass("active");
 // 			$("#WizardGlobal").removeClass("active");
 			//$("#ServiceDetails").removeClass("active");		
