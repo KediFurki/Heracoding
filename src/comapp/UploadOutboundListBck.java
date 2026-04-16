@@ -138,34 +138,34 @@ public class UploadOutboundListBck extends HttpServlet {
                         log.info(session.getId() + " - dashboard.OutboundListBck_InsertCallingList - record_id:" + cols[0] + " contact_info:" + cols[1] + " Numero_ACT:" + cols[24]);
 
                         cstmt = conn.prepareCall("{ call dashboard.OutboundListBck_InsertCallingList(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
-
-                        cstmt.setInt(1, parseIntSafe(cols[0]));
-                        cstmt.setString(2, nullIfNull(cols[1]));
-                        cstmt.setInt(3, parseIntSafe(cols[2]));
-                        cstmt.setInt(4, parseIntSafe(cols[3]));
-                        cstmt.setInt(5, parseIntSafe(cols[4]));
-                        cstmt.setInt(6, parseIntSafe(cols[5]));
-                        cstmt.setInt(7, parseIntSafe(cols[6]));
-                        cstmt.setString(8, nullIfNull(cols[7]));
-                        cstmt.setString(9, nullIfNull(cols[8]));
-                        cstmt.setInt(10, parseIntSafe(cols[9]));
-                        cstmt.setInt(11, parseIntSafe(cols[10]));
-                        cstmt.setInt(12, parseIntSafe(cols[11]));
-                        cstmt.setInt(13, parseIntSafe(cols[12]));
-                        cstmt.setString(14, nullIfNull(cols[13]));
-                        cstmt.setInt(15, parseIntSafe(cols[14]));
-                        cstmt.setInt(16, parseIntSafe(cols[15]));
-                        cstmt.setString(17, nullIfNull(cols[16]));
-                        cstmt.setString(18, nullIfNull(cols[17]));
-                        cstmt.setString(19, nullIfNull(cols[18]));
-                        cstmt.setString(20, nullIfNull(cols[19]));
-                        cstmt.setString(21, nullIfNull(cols[20]));
-                        cstmt.setString(22, nullIfNull(cols[21]));
-                        cstmt.setString(23, nullIfNull(cols[22]));
-                        cstmt.setString(24, nullIfNull(cols[23]));
-                        cstmt.setString(25, nullIfNull(cols[24]));
-                        cstmt.setString(26, nullIfNull(cols[25]));
-                        cstmt.setString(27, nullIfNull(cols[26]));
+                       
+                        cstmt.setInt(1, parseIntSafe(cols[0]));           // record_id
+                        cstmt.setString(2, nullIfNull(cols[1]));          // contact_info
+                        cstmt.setInt(3, parseIntSafe(cols[2]));           // contact_info_type
+                        cstmt.setInt(4, parseIntSafe(cols[3]));           // record_type
+                        cstmt.setInt(5, parseIntSafe(cols[4]));           // record_status
+                        cstmt.setInt(6, parseIntSafe(cols[5]));           // call_result
+                        cstmt.setInt(7, parseIntSafe(cols[6]));           // attempt
+                        cstmt.setInt(8, parseIntSafe(cols[7]));           // dial_sched_time (INT)
+                        cstmt.setInt(9, parseIntSafe(cols[8]));           // call_time (INT)
+                        cstmt.setInt(10, parseIntSafe(cols[9]));          // daily_from
+                        cstmt.setInt(11, parseIntSafe(cols[10]));         // daily_till
+                        cstmt.setInt(12, parseIntSafe(cols[11]));         // tz_dbid
+                        cstmt.setInt(13, parseIntSafe(cols[12]));         // campaign_id
+                        cstmt.setString(14, nullIfNull(cols[13]));        // agent_id
+                        cstmt.setInt(15, parseIntSafe(cols[14]));         // chain_id
+                        cstmt.setInt(16, parseIntSafe(cols[15]));         // chain_n (Calculated)
+                        cstmt.setInt(17, parseIntSafe(cols[16]));         // group_id (INT)
+                        cstmt.setInt(18, parseIntSafe(cols[17]));         // app_id (INT)
+                        cstmt.setString(19, nullIfNull(cols[18]));        // treatments
+                        cstmt.setInt(20, parseIntSafe(cols[19]));         // media_ref (INT)
+                        cstmt.setString(21, nullIfNull(cols[20]));        // email_subject
+                        cstmt.setInt(22, parseIntSafe(cols[21]));         // email_template_id (INT)
+                        cstmt.setInt(23, parseIntSafe(cols[22]));         // switch_id (INT)
+                        cstmt.setString(24, nullIfNull(cols[23]));        // Data_Inserimento (SP datetime)
+                        cstmt.setString(25, nullIfNull(cols[25]));        // Nome_Cognome (CSV index 25)
+                        cstmt.setString(26, nullIfNull(cols[24]));        // Numero_ACT (CSV index 24)
+                        cstmt.setString(27, nullIfNull(cols[26]));        // Processo
 
                         cstmt.execute();
                         log.debug(session.getId() + " - executeCall complete");
