@@ -39,7 +39,9 @@
 						<td style="width: 70%">
 							<table class="left">
 								<tr>
+<% if (!oblead_bck) { %>
 									<td><a class="green" id="OutboundListLeadGlobal" href="OutboundListLeadGlobal.jsp" target="_MainIframe">Lista Lead OutBound</a></td>
+<% } %>
 <% if (oblead_bck) { %>
 									<td><a class="green" id="OutboundListBckGlobal" href="OutboundListBckGlobal.jsp" target="_MainIframe">Lista Lead OutBound Backend</a></td>
 <% } %>
