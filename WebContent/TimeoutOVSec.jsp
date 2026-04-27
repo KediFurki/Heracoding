@@ -199,7 +199,7 @@
 								<table class="roundedCorners small">
 <% 									// ###### HEAD SERVIZI ###### %>
 									<tr class="listGroupItem active blue">
-										<td colspan="<%=""+(numPoli+2)%>"><div class="title">per SERVIZI</div></td>
+										<td colspan="<%=""+(numPoli+2)%>"><div class="title">Timeout Overflow per Servizi</div></td>
 									</tr>
 <% 									// ###### ROW SWITCH / POLI ###### %>
 									<tr class="listGroupItem active lightblue">
@@ -286,13 +286,26 @@
 %>
 										<td><div class="title"></div></td>
 									</tr>
+<% 									// ###### CLOSE TABLE 1 / OPEN UNIVERSAL ROW ###### %>
+								</table>
+								<%-- ###### UNIVERSAL VALUE INLINE ROW ###### --%>
+								<table style="margin: 10px 0; width: 100%;">
+									<tr>
+										<td style="text-align: left; padding-left: 8px;">
+											<span class="title" style="margin-right: 10px;">Timeout Overflow per Esigenze valore universale:</span>
+											<input type="number" id="timedef_all" min="0" max="999" value="0" style="width: 50px; margin-right: 10px;">
+											<button type="button" class="buttonsmall blue" id="timedef_btn" onclick="timedef_onclick()">SET ALL</button>
+										</td>
+									</tr>
+								</table>
+								<table class="roundedCorners small">
 <% 									// ###### HEAD ESIGENZE ###### %>
 									<tr class="listGroupItem active blue">
-										<td colspan="<%=""+(numPoli+2)%>"><div class="title">per ESIGENZE</div></td>
+										<td colspan="<%=""+(numPoli+2)%>"><div class="title">Timeout Overflow per Esigenze</div></td>
 									</tr>
 <% 									// ###### ROW POLI ###### %>
 									<tr class="listGroupItem active lightblue">
-										<td rowspan="2" class="middle"><div class="title center">ESIGENZA</div></td>
+										<td rowspan="1" class="middle"><div class="title center">Esigenza</div></td>
 <%
 			for (int ip=0; ip<actPoli.length; ip++) {
 				if (actPoli[ip]) {
@@ -303,30 +316,6 @@
 			}
 %>
 										<td><div class="title"></div></td>
-									</tr>
-<% 									// ###### ROW DEFAULT TITLE ###### %>
-									<tr class="listGroupItem">
-										<td colspan="<%=""+(numPoli+2)%>" style="padding-left: 8px;">
-											<div class="title">Timeout Overflow per esigenze - valore universale</div>
-										</td>
-									</tr>
-<% 									// ###### ROW DEFAULT ###### %>
-									<tr class="listGroupItem active lightblue">
-<%
-			for (int ip=0; ip<actPoli.length; ip++) {
-				if (actPoli[ip]) {
-%>
-										<td class="nopadding_lr superlightblue">
-											<input type="number" style="width:40px;" id="timedef<%=""+(ip+1)%>" min="0" max="999" value="0">
-										</td>
-<%
-				}
-			}
-%>
-										<td class="nopadding_lr superlightblue">
-											<small>Applica a tutte</small><br>
-											<button type="button" class="buttonsmall blue" id="timedef_btn" onclick="timedef_onclick()">SET</button>
-										</td>
 									</tr>
 <% 									// ###### ROWS ###### %>
 <%
@@ -437,7 +426,7 @@
 		var _status = $("#flag_v").is(':checked');
 		$("input[id^='tims_']").prop("disabled", !_status);
 		$("input[id^='time_']").prop("disabled", _status);
-		$("input[id^='timedef']").prop("disabled", _status);
+		$("#timedef_all").prop("disabled", _status);
 		$("#timedef_btn").prop("disabled", _status);
 		$("#flag_text").text(_status?"Attivo":"Disattivo");
 	}
@@ -448,9 +437,9 @@
 
 	timedef_onclick = function() {
  		var numesi = $('#numesi').val();
+		var value = $('#timedef_all').val();
 		for (var ip = 1; ip <= 7; ip++) {
 			if (actPoli[ip-1]) {
-				var value = $('#timedef'+ip).val();
 				for (var ie = 1; ie <= numesi; ie++) {
 					$('#time_'+ip+'_'+ie).val(value);
 				}

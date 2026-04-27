@@ -74,7 +74,7 @@
 							<table>
 								<tr>
 									<td style="width: 45%">
-										<div class="title">Lista OutBound Backend</div>
+										<div class="title">Lista OutBound Backoffice</div>
 									</td>
 									<td>
 										<div class="container_img title right green " onclick="loadfile();">
@@ -112,7 +112,7 @@
 		<div class="modal-header green">
 			<table style="width: 100%">
 				<tr>
-					<td>	<h2>Carica Lista OutBound Backend</h2></td>
+					<td>	<h2>Carica Lista OutBound Backoffice</h2></td>
 					<td>
 						<div class="container_img title right green "  onclick="$('#LoadFile').hide();">
 							<img alt="" class="" src="images/CloseWhite_.png">

@@ -112,7 +112,7 @@
 									<td><a class="green" id="OperatorAvailableGlobal" href="OperatorAvailableGlobal.jsp" target="_MainIframe">Flag Operatore Disponibile</a></td>
 									<td><a class="green" id="OutboundListLeadGlobal" href="OutboundListLeadGlobal.jsp" target="_MainIframe">Lista Lead OutBound</a></td>
 								<td><a class="green" id="TcpGlobal" href="TcpGlobal.jsp" target="_MainIframe">Clienti Tariffa TCP</a></td>
-									<td><a class="green" id="OutboundListBckGlobal" href="OutboundListBckGlobal.jsp" target="_MainIframe">Lista Lead OutBound Backend</a></td>
+									<td><a class="green" id="OutboundListBckGlobal" href="OutboundListBckGlobal.jsp" target="_MainIframe">Lista Lead OutBound Backoffice</a></td>
 							</tr>
 							</table>
 						</td>
