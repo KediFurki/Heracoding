@@ -70,7 +70,6 @@
 			session.setAttribute("CCC-MAIL", false);
 			session.setAttribute("CCC-MAIL-RT", false);
 			session.setAttribute("CCC-INFOMART", false);
-			session.setAttribute("OBLEAD-BCK", false);
 			response.sendRedirect("MainCCC.jsp");
 			break;
 		case "CCC-MAIL":
@@ -79,7 +78,6 @@
 			session.setAttribute("CCC-MAIL", true);
 			session.setAttribute("CCC-MAIL-RT", false);
 			session.setAttribute("CCC-INFOMART", false);
-			session.setAttribute("OBLEAD-BCK", false);
 			response.sendRedirect("MainCCC.jsp");
 			break;
 		case "CCC-MAIL-RT":
@@ -88,7 +86,6 @@
 			session.setAttribute("CCC-MAIL", true);
 			session.setAttribute("CCC-MAIL-RT", true);
 			session.setAttribute("CCC-INFOMART", true);
-			session.setAttribute("OBLEAD-BCK", false);
 			response.sendRedirect("MainCCC.jsp");
 			break;
 		case "WEB-MAIL-CCC":
@@ -104,7 +101,6 @@
 		case "OUTBOUNDLEAD":
 			session.setAttribute("DBSystemProperties", "CCC");
 			session.setAttribute("Environment", "CCC");
-			session.setAttribute("OBLEAD-BCK", false);
 			response.sendRedirect("MainOBLEAD.jsp");
 			break;
 		case "OUTBOUNDLEAD-BCK":
