@@ -259,6 +259,28 @@
 		
 	try {			
 		if (StringUtils.isBlank(CodIvr)) {
+%>
+<table class="center"><tr>
+	<td style="width: 10%"></td>
+	<td style="width: 80%">
+		<table class="roundedCorners small">
+			<thead>
+				<tr class="listGroupItem active blue">
+					<td><div class="title">Dissuasione e CallBack</div></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr><td>
+					<div class="title center" style="padding: 30px;">
+						Selezionare un servizio dalla lista per visualizzare i parametri di dissuasione.
+					</div>
+				</td></tr>
+			</tbody>
+		</table>
+	</td>
+	<td style="width: 10%"></td>
+</tr></table>
+<%
 		} else {
 			Context ctx = new InitialContext();
 			ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/"+ConfigServlet.web_app+"CNF");

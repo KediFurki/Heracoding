@@ -304,6 +304,12 @@
 %>
 										<td><div class="title"></div></td>
 									</tr>
+<% 									// ###### ROW DEFAULT TITLE ###### %>
+									<tr class="listGroupItem">
+										<td colspan="<%=""+(numPoli+2)%>" style="padding-left: 8px;">
+											<div class="title">Timeout Overflow per esigenze - valore universale</div>
+										</td>
+									</tr>
 <% 									// ###### ROW DEFAULT ###### %>
 									<tr class="listGroupItem active lightblue">
 <%
@@ -311,13 +317,14 @@
 				if (actPoli[ip]) {
 %>
 										<td class="nopadding_lr superlightblue">
-											<input type="number" style="width:40px;" id="timedef<%=""+(ip+1)%>" min="0" max="999" value="0"">
+											<input type="number" style="width:40px;" id="timedef<%=""+(ip+1)%>" min="0" max="999" value="0">
 										</td>
 <%
 				}
 			}
 %>
 										<td class="nopadding_lr superlightblue">
+											<small>Applica a tutte</small><br>
 											<button type="button" class="buttonsmall blue" id="timedef_btn" onclick="timedef_onclick()">SET</button>
 										</td>
 									</tr>

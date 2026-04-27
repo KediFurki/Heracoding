@@ -101,19 +101,21 @@ public class UploadOutboundListBck extends HttpServlet {
 
                     try (BufferedReader br = new BufferedReader(new FileReader(upload_location))) {
                         String line;
-                        boolean isHeader = true;
+                        boolean firstLine = true;
                         while ((line = br.readLine()) != null) {
-                            if (isHeader) {
-                                isHeader = false;
-                                continue;
-                            }
-                            if (!StringUtils.isBlank(line)) {
-                                String[] cols = line.split(";", -1);
-                                if (cols.length == 4 || cols.length == 5 || cols.length >= 27) {
-                                    records.add(cols);
-                                } else {
-                                    log.warn(session.getId() + " - Row skipped, insufficient column count: " + cols.length);
+                            if (StringUtils.isBlank(line)) continue;
+                            if (firstLine) {
+                                firstLine = false;
+                                if (line.toLowerCase().contains("contact_info")) {
+                                    log.info(session.getId() + " - Header detected, skipping: " + line);
+                                    continue;
                                 }
+                            }
+                            String[] cols = line.split(";", -1);
+                            if (cols.length == 4 || cols.length == 5 || cols.length >= 27) {
+                                records.add(cols);
+                            } else {
+                                log.warn(session.getId() + " - Row skipped, invalid column count: " + cols.length);
                             }
                         }
                     } catch (Exception ex) {
@@ -211,16 +213,5 @@ public class UploadOutboundListBck extends HttpServlet {
         val = val.trim();
         if (val.equalsIgnoreCase("NULL") || val.isEmpty()) return null;
         return val;
-    }
-
-    private int parseIntSafe(String val) {
-        if (val == null) return 0;
-        val = val.trim();
-        if (val.equalsIgnoreCase("NULL") || val.isEmpty()) return 0;
-        try {
-            return Integer.parseInt(val);
-        } catch (NumberFormatException e) {
-            return 0;
-        }
     }
 }
