@@ -331,20 +331,33 @@
 			String flag_value = "false";
 			String flag_transactionname = "";
 			String flag_key = "";
-			log.info(session.getId() + " - dashboard.Dissuasion_GetFlagDissuasion('" + CodIvr + "')");
-			cstmtCnf = connCnf.prepareCall("{ call dashboard.Dissuasion_GetFlagDissuasion(?)} ");
-			cstmtCnf.setString(1, CodIvr);
-			rsCnf = cstmtCnf.executeQuery();					
-			log.debug(session.getId() + " - executeCall complete");
-			if (rsCnf.next()) {
-				flag_transactionname = rsCnf.getString("transactionname");
-				flag_key = rsCnf.getString("key");
-				flag_value = rsCnf.getString("value");
+			String flag_warn = null;
+			try {
+				log.info(session.getId() + " - dashboard.Dissuasion_GetFlagDissuasion('" + CodIvr + "')");
+				cstmtCnf = connCnf.prepareCall("{ call dashboard.Dissuasion_GetFlagDissuasion(?)} ");
+				cstmtCnf.setString(1, CodIvr);
+				rsCnf = cstmtCnf.executeQuery();
+				log.debug(session.getId() + " - executeCall complete");
+				if (rsCnf.next()) {
+					flag_transactionname = rsCnf.getString("transactionname");
+					flag_key = rsCnf.getString("key");
+					flag_value = rsCnf.getString("value");
+				}
+			} catch (Exception eFlag) {
+				flag_warn = eFlag.getMessage();
+				log.warn(session.getId() + " - Dissuasion_GetFlagDissuasion failed: " + eFlag.getMessage());
+			} finally {
+				try { rsCnf.close(); } catch (Exception e) {}
+				try { cstmtCnf.close(); } catch (Exception e) {}
+				rsCnf = null; cstmtCnf = null;
+			}
+			if (flag_warn != null) {
 %>
+										<td colspan="5" style="color:#b00;font-size:11px;">Dissuasion_GetFlagDissuasion non disponibile: <%= org.apache.commons.lang3.StringEscapeUtils.escapeHtml4(flag_warn) %></td>
+									</tr>
+									<tr class="listGroupItem active lightblue">
 <%
 			}
-			try { rsCnf.close(); } catch (Exception e) {}
-			try { cstmtCnf.close(); } catch (Exception e) {}
 %>
 										<td class="nopadding_lr">
 											<input type="hidden" name="flag_k" value="<%=flag_key%>">
@@ -367,28 +380,34 @@
 			int TEMPO_MAX = -1;	
 			
 			log.info(session.getId() + " - dashboard.Dissuasion_GetTimeMinMax('" + CodIvr + "')");
-			cstmtCnf = connCnf.prepareCall("{ call dashboard.Dissuasion_GetTimeMinMax(?)} ");
-			cstmtCnf.setString(1, CodIvr);
-			rsCnf = cstmtCnf.executeQuery();					
-			log.debug(session.getId() + " - executeCall complete");
-			while (rsCnf.next()) {
-				String key = rsCnf.getString("key");
-				String value = rsCnf.getString("value");
-				switch (key) {
-				case "TEMPO_MIN":
-					transactionnameMinMax =  rsCnf.getString("transactionname"); 
-					fTEMPO_MIN = true;
-					TEMPO_MIN = Integer.parseInt(value);
-					break;
-				case "TEMPO_MAX":
-					transactionnameMinMax =  rsCnf.getString("transactionname"); 
-					fTEMPO_MAX = true;
-					TEMPO_MAX = Integer.parseInt(value);
-					break;
+			try {
+				cstmtCnf = connCnf.prepareCall("{ call dashboard.Dissuasion_GetTimeMinMax(?)} ");
+				cstmtCnf.setString(1, CodIvr);
+				rsCnf = cstmtCnf.executeQuery();
+				log.debug(session.getId() + " - executeCall complete");
+				while (rsCnf.next()) {
+					String key = rsCnf.getString("key");
+					String value = rsCnf.getString("value");
+					switch (key) {
+					case "TEMPO_MIN":
+						transactionnameMinMax =  rsCnf.getString("transactionname"); 
+						fTEMPO_MIN = true;
+						TEMPO_MIN = Integer.parseInt(value);
+						break;
+					case "TEMPO_MAX":
+						transactionnameMinMax =  rsCnf.getString("transactionname"); 
+						fTEMPO_MAX = true;
+						TEMPO_MAX = Integer.parseInt(value);
+						break;
+					}
 				}
+			} catch (Exception eMM) {
+				log.warn(session.getId() + " - Dissuasion_GetTimeMinMax failed: " + eMM.getMessage());
+			} finally {
+				try { rsCnf.close(); } catch (Exception e) {}
+				try { cstmtCnf.close(); } catch (Exception e) {}
+				rsCnf = null; cstmtCnf = null;
 			}
-			try { rsCnf.close(); } catch (Exception e) {}
-			try { cstmtCnf.close(); } catch (Exception e) {}
 %>
 										<input type="hidden" name="tmm_t" value="<%=Utility.getNotNull(transactionnameMinMax)%>">
 <%
@@ -422,38 +441,44 @@
 			int DISSUASIONE_LIMITE_ON = -1;
 
 			log.info(session.getId() + " - dashboard.Dissuasion_GetAnnexIvr('" + CodIvr + "')");
-			cstmtCnf = connCnf.prepareCall("{ call dashboard.Dissuasion_GetAnnexIvr(?)} ");
-			cstmtCnf.setString(1, CodIvr);
-			rsCnf = cstmtCnf.executeQuery();
-			while (rsCnf.next()) {
-				int dbid =  rsCnf.getInt("dbid"); 
-				String key = rsCnf.getString("key");
-				String value = rsCnf.getString("value");
-				switch (key) {
-				case "CALLBACK_LIMITE_OFF":
-					transactionnameAnnex = rsCnf.getString("transactionname");
-					fCALLBACK_LIMITE_OFF = true;
-					CALLBACK_LIMITE_OFF = Integer.parseInt(value);
-					break;
-				case "CALLBACK_LIMITE_ON":
-					transactionnameAnnex = rsCnf.getString("transactionname");
-					fCALLBACK_LIMITE_ON = true;
-					CALLBACK_LIMITE_ON = Integer.parseInt(value);
-					break;
-				case "DISSUASIONE_LIMITE_OFF":
-					transactionnameAnnex = rsCnf.getString("transactionname");
-					fDISSUASIONE_LIMITE_OFF = true;
-					DISSUASIONE_LIMITE_OFF = Integer.parseInt(value);
-					break;
-				case "DISSUASIONE_LIMITE_ON":
-					transactionnameAnnex = rsCnf.getString("transactionname");
-					fDISSUASIONE_LIMITE_ON = true;
-					DISSUASIONE_LIMITE_ON = Integer.parseInt(value);
-					break;
+			try {
+				cstmtCnf = connCnf.prepareCall("{ call dashboard.Dissuasion_GetAnnexIvr(?)} ");
+				cstmtCnf.setString(1, CodIvr);
+				rsCnf = cstmtCnf.executeQuery();
+				while (rsCnf.next()) {
+					int dbid =  rsCnf.getInt("dbid"); 
+					String key = rsCnf.getString("key");
+					String value = rsCnf.getString("value");
+					switch (key) {
+					case "CALLBACK_LIMITE_OFF":
+						transactionnameAnnex = rsCnf.getString("transactionname");
+						fCALLBACK_LIMITE_OFF = true;
+						CALLBACK_LIMITE_OFF = Integer.parseInt(value);
+						break;
+					case "CALLBACK_LIMITE_ON":
+						transactionnameAnnex = rsCnf.getString("transactionname");
+						fCALLBACK_LIMITE_ON = true;
+						CALLBACK_LIMITE_ON = Integer.parseInt(value);
+						break;
+					case "DISSUASIONE_LIMITE_OFF":
+						transactionnameAnnex = rsCnf.getString("transactionname");
+						fDISSUASIONE_LIMITE_OFF = true;
+						DISSUASIONE_LIMITE_OFF = Integer.parseInt(value);
+						break;
+					case "DISSUASIONE_LIMITE_ON":
+						transactionnameAnnex = rsCnf.getString("transactionname");
+						fDISSUASIONE_LIMITE_ON = true;
+						DISSUASIONE_LIMITE_ON = Integer.parseInt(value);
+						break;
+					}
 				}
+			} catch (Exception eAnn) {
+				log.warn(session.getId() + " - Dissuasion_GetAnnexIvr failed: " + eAnn.getMessage());
+			} finally {
+				try { rsCnf.close(); } catch (Exception e) {}
+				try { cstmtCnf.close(); } catch (Exception e) {}
+				rsCnf = null; cstmtCnf = null;
 			}
-			try { rsCnf.close(); } catch (Exception e) {}
-			try { cstmtCnf.close(); } catch (Exception e) {}
 %>
 										<input type="hidden" name="tann_t" value="<%=Utility.getNotNull(transactionnameAnnex)%>">
 <%
@@ -500,11 +525,17 @@
 <% 									// ###### ROWS ###### %>
 <%
 			log.info(session.getId() + " - dashboard.Dissuasion_GetEsigenze('" + CodIvr + "')");
-			cstmt = conn.prepareCall("{ call dashboard.Dissuasion_GetEsigenze(?)} ");
-			cstmt.setString(1, CodIvr);
-			rs = cstmt.executeQuery();					
+			boolean esigenzeOk = false;
+			try {
+				cstmt = conn.prepareCall("{ call dashboard.Dissuasion_GetEsigenze(?)} ");
+				cstmt.setString(1, CodIvr);
+				rs = cstmt.executeQuery();
+				esigenzeOk = true;
+			} catch (Exception eEsi) {
+				log.warn(session.getId() + " - Dissuasion_GetEsigenze failed: " + eEsi.getMessage());
+			}
 			log.debug(session.getId() + " - executeCall complete");
-			while (rs.next()) {
+			while (esigenzeOk && rs.next()) {
 				numEsigenze++;
 				tailName = ""+numEsigenze;
 				
@@ -521,37 +552,45 @@
 				DISSUASIONE_LIMITE_ON = -1;
 
 				log.info(session.getId() + " - dashboard.Dissuasion_GetAnnexEsigenza('" + id_esigenza + "')");
-				cstmtCnf = connCnf.prepareCall("{ call dashboard.Dissuasion_GetAnnexEsigenza(?)} ");
-				cstmtCnf.setString(1, id_esigenza);
-				rsCnf = cstmtCnf.executeQuery();					
-				log.debug(session.getId() + " - executeCall complete");
-				while (rsCnf.next()) {
-					int dbid =  rsCnf.getInt("dbid"); 
-					String key = rsCnf.getString("key");
-					String value = rsCnf.getString("value");
-					switch (key) {
-					case "CALLBACK_LIMITE_OFF":
-						transactionnameEsi = rsCnf.getString("transactionname");
- 						fCALLBACK_LIMITE_OFF = true;
-						CALLBACK_LIMITE_OFF = Integer.parseInt(value);
-						break;
-					case "CALLBACK_LIMITE_ON":
-						transactionnameEsi = rsCnf.getString("transactionname");
- 						fCALLBACK_LIMITE_ON = true;
-						CALLBACK_LIMITE_ON = Integer.parseInt(value);
-						break;
-					case "DISSUASIONE_LIMITE_OFF":
-						transactionnameEsi = rsCnf.getString("transactionname");
- 						fDISSUASIONE_LIMITE_OFF = true;
-						DISSUASIONE_LIMITE_OFF = Integer.parseInt(value);
-						break;
-					case "DISSUASIONE_LIMITE_ON":
-						transactionnameEsi = rsCnf.getString("transactionname");
- 						fDISSUASIONE_LIMITE_ON = true;
-						DISSUASIONE_LIMITE_ON = Integer.parseInt(value);
-						break;
+				try {
+					cstmtCnf = connCnf.prepareCall("{ call dashboard.Dissuasion_GetAnnexEsigenza(?)} ");
+					cstmtCnf.setString(1, id_esigenza);
+					rsCnf = cstmtCnf.executeQuery();
+					log.debug(session.getId() + " - executeCall complete");
+					while (rsCnf.next()) {
+						int dbid =  rsCnf.getInt("dbid"); 
+						String key = rsCnf.getString("key");
+						String value = rsCnf.getString("value");
+						switch (key) {
+						case "CALLBACK_LIMITE_OFF":
+							transactionnameEsi = rsCnf.getString("transactionname");
+							fCALLBACK_LIMITE_OFF = true;
+							CALLBACK_LIMITE_OFF = Integer.parseInt(value);
+							break;
+						case "CALLBACK_LIMITE_ON":
+							transactionnameEsi = rsCnf.getString("transactionname");
+							fCALLBACK_LIMITE_ON = true;
+							CALLBACK_LIMITE_ON = Integer.parseInt(value);
+							break;
+						case "DISSUASIONE_LIMITE_OFF":
+							transactionnameEsi = rsCnf.getString("transactionname");
+							fDISSUASIONE_LIMITE_OFF = true;
+							DISSUASIONE_LIMITE_OFF = Integer.parseInt(value);
+							break;
+						case "DISSUASIONE_LIMITE_ON":
+							transactionnameEsi = rsCnf.getString("transactionname");
+							fDISSUASIONE_LIMITE_ON = true;
+							DISSUASIONE_LIMITE_ON = Integer.parseInt(value);
+							break;
+						}
 					}
-				}				
+				} catch (Exception eAE) {
+					log.warn(session.getId() + " - Dissuasion_GetAnnexEsigenza failed: " + eAE.getMessage());
+				} finally {
+					try { rsCnf.close(); } catch (Exception e) {}
+					try { cstmtCnf.close(); } catch (Exception e) {}
+					rsCnf = null; cstmtCnf = null;
+				}
 %>
 									<tr class="listGroupItem">
 										<td>
@@ -606,6 +645,13 @@
 		}
 	} catch (Exception e) {
 		log.error(session.getId() + " - general: " + e.getMessage(), e);
+		// DEBUG: surface the error on the page so it doesn't render blank
+		java.io.StringWriter sw = new java.io.StringWriter();
+		e.printStackTrace(new java.io.PrintWriter(sw));
+		out.println("<div style='padding:20px;color:#b00;font-family:monospace;white-space:pre-wrap;border:1px solid #b00;margin:20px;'>");
+		out.println("<b>DissuasionCCC error:</b> " + org.apache.commons.lang3.StringEscapeUtils.escapeHtml4(String.valueOf(e.getMessage())));
+		out.println("\n\n" + org.apache.commons.lang3.StringEscapeUtils.escapeHtml4(sw.toString()));
+		out.println("</div>");
 	} finally {
 		try { rsCnf.close(); } catch (Exception e) {}
 		try { cstmtCnf.close(); } catch (Exception e) {}
